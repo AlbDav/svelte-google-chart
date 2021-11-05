@@ -5,6 +5,8 @@
   }
 </script>
 
+<svelte:options tag="my-counter" />
+
 <button on:click={increment}>
   Clicks: {count}
 </button>
