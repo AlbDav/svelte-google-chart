@@ -1,11 +1,14 @@
+<svelte:options tag="my-counter" />
+<svelte:head>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</svelte:head>
+
 <script lang="ts">
   let count: number = 0
   const increment = () => {
     count += 1
   }
 </script>
-
-<svelte:options tag="my-counter" />
 
 <button on:click={increment}>
   Clicks: {count}
