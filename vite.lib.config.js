@@ -6,7 +6,7 @@ export default defineConfig({
   build:{
     lib:{
       entry: './src/main.ts',
-      name: 'MyLibrary',
+      name: 'SvelteGoogleChart',
     }
   },
   plugins: [svelte({
