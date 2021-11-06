@@ -4,20 +4,18 @@
 </svelte:head>
 
 <script lang="ts">
+	import { onMount } from "svelte";
 	let chartContainer;
+
+	export let chartData: any = [];
+	export let type: string = "bar";
 
     function drawChart() {
       var data = new google.visualization.DataTable();
 
       data.addColumn('string', 'Topping');
       data.addColumn('number', 'Slices');
-      data.addRows([
-        ['Mushrooms', 3],
-        ['Onions', 1],
-        ['Olives', 1],
-        ['Zucchini', 1],
-        ['Pepperoni', 2]
-      ]);
+      data.addRows(chartData);
 
       var options = {'title':'How Much Pizza I Ate Last Night',
                      'width':400,
@@ -31,6 +29,15 @@
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 	}
+
+	$: chartDataChanged(chartData);
+	function chartDataChanged(chartData) {
+		console.log(chartData);
+	}
+
+	onMount(() => {
+		console.log(type);
+	});
 </script>
 
 <div bind:this={chartContainer}></div>
