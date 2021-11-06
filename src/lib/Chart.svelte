@@ -6,38 +6,48 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	let chartContainer;
+	let chart;
+	let initialized: boolean = false;
 
 	export let chartData: any = [];
 	export let type: string = "bar";
 
     function drawChart() {
-      var data = new google.visualization.DataTable();
+      let data = new google.visualization.DataTable();
 
       data.addColumn('string', 'Topping');
       data.addColumn('number', 'Slices');
       data.addRows(chartData);
 
-      var options = {'title':'How Much Pizza I Ate Last Night',
+      let options = {'title':'How Much Pizza I Ate Last Night',
                      'width':400,
                      'height':300};
 
-      var chart = new google.visualization.PieChart(chartContainer);
+	  let chartClass = getChartClass();
+      chart = new chartClass(chartContainer);
       chart.draw(data, options);
     }
 
 	const inizializeChart = () => {
       google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+	  initialized = true;
+    //   google.charts.setOnLoadCallback(drawChart);
 	}
 
 	$: chartDataChanged(chartData);
 	function chartDataChanged(chartData) {
-		console.log(chartData);
+		if (initialized) {
+			drawChart();
+		}
 	}
 
-	onMount(() => {
-		console.log(type);
-	});
+	function getChartClass() {
+		if (type === "pie") {
+			return google.visualization.PieChart;
+		} else {
+			return google.visualization.BarChart;
+		}
+	}
 </script>
 
 <div bind:this={chartContainer}></div>

@@ -1,8 +1,7 @@
 export * from './lib/Chart.svelte';
 
-window.onload = () => {
-	let chart: any = document.getElementsByClassName('google-chart');
-	console.log(chart);
+/* window.onload = () => {
+	let chart: any = document.querySelector('google-chart');
 	chart.chartData = [
 		['Mushrooms', 3],
 		['Onions', 1],
@@ -10,4 +9,4 @@ window.onload = () => {
 		['Zucchini', 1],
 		['Pepperoni', 2]
 	];
-}
+} */
